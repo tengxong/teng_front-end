@@ -7,8 +7,15 @@ const textStyle = {
     fontSize: 17,
     cursor: 'pointer'
 }
+export default function Navbar(props) {
+    const handleLogin =()=>{
+        props.setopenSigninDiag (true)
+    }
+    
+    const handleLogup =() =>{
+        props.setopenSignUpDiag(true)
+    }
 
-export default function Navbar() {
     const navigate = useNavigate()
 
     const handleNavigate = (path) => {
@@ -31,8 +38,8 @@ export default function Navbar() {
 
 
                 <Box flex={1} display={{ md: 'flex', xs: 'none' }} justifyContent={'flex-end'}>
-                    <Button variant="outlined" color='success' sx={{ marginRight: 2 }}>Sing in</Button>
-                    <Button variant="outlined" color='error'>Sing up</Button>
+                    <Button variant="outlined" color='success' sx={{ marginRight: 2 }} onClick={handleLogin}>Sing in</Button>
+                    <Button variant="outlined" color='error' onClick={handleLogup}>Sing up</Button>
                 </Box>
                 <MenuIcon fontSize='large' sx={{display:{ md: 'none', xs: 'flex' }}}  />
             </Box>
