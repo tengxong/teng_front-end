@@ -13,6 +13,7 @@ import SignUpDiag from '../Components/SignUpDiag'
 export default function Index() {
   const [openSigninDialog, setopenSigninDiag] = useState(false)
   const [openSignUpDiag, setopenSignUpDiag] = useState(false)
+  const [isLoggedIn,setisLoggedIn] = useState (true)
 
   const handleCloseSigninDiag = () => {
     setopenSigninDiag(false)
@@ -23,13 +24,14 @@ export default function Index() {
   return (
     <div>
       <BrowserRouter>
-        <Navbar setopenSigninDiag={setopenSigninDiag} setopenSignUpDiag={setopenSignUpDiag} />
+        <Navbar isLoggedIn={isLoggedIn} setopenSigninDiag={setopenSigninDiag} setopenSignUpDiag={setopenSignUpDiag} />
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/project' element={<Project />} />
           <Route path='/about-us' element={<AboutUs />} />
           <Route path='/contact-us' element={<ContactUs />} />
           <Route path='/story' element={<Story />} />
+          <Route path='/profile' element={<Profile/>}/>
         </Routes>
         <SigninDialog
           open={openSigninDialog}
