@@ -1,14 +1,18 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Button, Box, Container, Menu, IconButton, MenuItem, Avatar } from '@mui/material';
 import { useNavigate } from 'react-router-dom'
 import MenuIcon from '@mui/icons-material/Menu';
 import Profile from '../router/profile';
-
+import { UserContext } from '../router/index';
 const textStyle = {
     fontSize: 17,
     cursor: 'pointer'
 }
 export default function Navbar(props) {
+    const [anchorEl, setAnchorEl] = React.useState(null);
+    const open = Boolean(anchorEl);
+    const {isLoggedIn,userInfo} = useContext(UserContext)
+
     const handleLogin = () => {
         props.setopenSigninDiag(true)
     }
@@ -22,16 +26,13 @@ export default function Navbar(props) {
     const handleNavigate = (path) => {
         navigate(path)
     }
-    const [anchorEl, setAnchorEl] = React.useState(null);
-    const open = Boolean(anchorEl);
+
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
     };
     const handleClose = () => {
         setAnchorEl(null);
     };
-
-
 
     return (
         < Container maxWidth='xl'>
@@ -49,25 +50,26 @@ export default function Navbar(props) {
 
 
                 <Box flex={1} display={{ md: 'flex', xs: 'none' }} justifyContent={'flex-end'}>
-                {props.isLoggedIn ?
-                     <IconButton onClick={()=>handleNavigate('/profile')}>
-                    <Avatar>p</Avatar>
-                    </IconButton>
-                    :
-                    <>
-                    <Profile/>
-                    <Button variant="outlined" color='success' sx={{ marginRight: 2 }} onClick={handleLogin}>Sing in</Button>
-                    <Button variant="outlined" color='error' onClick={handleLogup}>Sing up</Button>
-                    </>
+                    {isLoggedIn ?
+                        <IconButton onClick={() => handleNavigate('/profile')}>
+                            <Avatar src={window.$api + '/images/'+ userInfo.img} alt=''/>
+
+                        </IconButton>
+                        :
+                        <>
+                            <Button variant="outlined" color='success' sx={{ marginRight: 2 }} onClick={handleLogin}>Sing in</Button>
+                            <Button variant="outlined" color='error' onClick={handleLogup}>Sing up</Button>
+                        </>
                     }
 
                 </Box>
-                
-                <Box >
-                    <IconButton >
-                        <MenuIcon fontSize='large' sx={{ display: { md: 'none', xs: 'flex' } }} onClick={handleClick} />
+
+                <Box sx={{ display: { md: 'none', xs: 'flex' } }}>
+                    <IconButton onClick={handleClick} >
+                        <MenuIcon fontSize='large' />
                     </IconButton>
                 </Box>
+
                 <Menu
                     id="demo-positioned-menu"
                     aria-labelledby="demo-positioned-button"
@@ -83,17 +85,30 @@ export default function Navbar(props) {
                         horizontal: 'left',
                     }}
                 >
+                    {isLoggedIn &&
+                        <IconButton onClick={() => handleNavigate('/profile')}>
+                            <Avatar src={window.$api + '/images/'+ userInfo.img} />
+                        </IconButton>
+                    }
                     <MenuItem onClose={handleClose} onClick={() => handleNavigate("/project")}>project</MenuItem>
                     <MenuItem onClose={handleClose} onClick={() => handleNavigate("/story")}>Story</MenuItem>
                     <MenuItem onClose={handleClose} onClick={() => handleNavigate("/about-us")}>AboutUs</MenuItem>
                     <MenuItem onClose={handleClose} onClick={() => handleNavigate("/contact-us")}>ContactUs</MenuItem>
-                    <MenuItem >
-                        <Button variant="outlined" color='success' onClick={handleLogin} fullWidth>Sign in</Button>
-                    </MenuItem>
+                    {!isLoggedIn &&
+                    
+                            <MenuItem >
+                                <Button variant="outlined" color='success' onClick={handleLogin} fullWidth>Sign in</Button>
+                            </MenuItem>
+                        
+                    }
+                    {!isLoggedIn && 
                     <MenuItem>
                         <Button variant="outlined" color='error' onClick={handleLogup} fullWidth>sign up</Button>
                     </MenuItem>
+                    }
                 </Menu>
+
+
             </Box>
         </Container>
     )
