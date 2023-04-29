@@ -1,6 +1,6 @@
 import React, { useEffect, useContext, useState } from 'react'
 import { Avatar, Container, Box, Typography, TextField, MenuItem,Button } from '@mui/material'
-import { UserContext } from './router/Index'
+import { UserContext } from './Index'
 import axios from 'axios'
 
 export default function profile() {
