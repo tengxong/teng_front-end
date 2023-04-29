@@ -3,7 +3,7 @@ import { Button, Box, Container, Menu, IconButton, MenuItem, Avatar } from '@mui
 import { useNavigate } from 'react-router-dom'
 import MenuIcon from '@mui/icons-material/Menu';
 import Profile from '../router/profile';
-import { UserContext } from '../router/index';
+import { UserContext } from '../router/Index';
 const textStyle = {
     fontSize: 17,
     cursor: 'pointer'

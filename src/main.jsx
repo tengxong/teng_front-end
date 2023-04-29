@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import Index from '../router/index'
+import Index from './router/Index'
 import './index.css'
 
 
