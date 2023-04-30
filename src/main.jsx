@@ -4,7 +4,7 @@ import Index from './router/Index'
 import './index.css'
 
 
-window.$api ="http://teng-backend1.vercel.app"
+window.$api ="https://teng-backend1.vercel.app"
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
