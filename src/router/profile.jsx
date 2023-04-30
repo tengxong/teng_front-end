@@ -1,10 +1,10 @@
 import React, { useEffect, useContext, useState } from 'react'
-import { Avatar, Container, Box, Typography, TextField, MenuItem,Button } from '@mui/material'
+import { Avatar, Container, Box, Typography, TextField, MenuItem,Button,IconButton } from '@mui/material'
 import { UserContext } from './Index'
 import axios from 'axios'
 
 export default function profile() {
-  const { userInfo } = useContext(UserContext)
+  const { userInfo, setuserInfo } = useContext(UserContext)
   const [userProfileData, setuserProfileData] = useState([])
   const [userProfileInfo, setuserProfileInfo] = useState({})
 
@@ -51,11 +51,32 @@ const handleUpdate = () =>{
   })
 }
 
+const handleGetUploadImage = (e) =>{
+      let file = e.target.files[0]
+      let formData = new FormData()
+      formData.append('image',file)
+      formData.append('id',userInfo.id)
+      axios({
+        url:window.$api+'/uploadProfileImage',
+        method:'post',
+        data:formData,
+        // headers:{
+        //   'Content-Type': 'multipart/form-data'
+        // }
+      }).then(res =>{
+        setuserInfo({...userInfo, img: res.data.data.img});
+      })
+}
+
+
   return (
     <Container maxWidth='xl'>
       <Box display='flex'>
         <Box flex={1}>
+        <IconButton  component='label'>
           <Avatar sx={{ width: 200, height: 200, fontSize: 60 }} src={window.$api + '/images/'+ userInfo.img} alt=''/>
+          <input type='file' hidden accept='image/*' onChange={handleGetUploadImage}/>
+        </IconButton>
         </Box>
         <Box flex={3}>
           <Typography variant='h4'>{userProfileInfo?.firstname}{userProfileInfo?.lastname}</Typography>
