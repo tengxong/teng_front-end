@@ -9,7 +9,7 @@ export default function AboutUs() {
            <p style={{fontSize:20}}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt aut accusamus porro animi veniam, optio error architecto repellendus possimus deserunt reiciendis officia quibusdam necessitatibus quasi dolorem. Consectetur dicta iusto tempora asperiores? Qui nostrum minima quia fugit adipisci, sed temporibus rerum quo facere velit nam fugiat a ex tempora, laudantium possimus.</p>
         </Box>
         <Box flex={1} width={'50%'}>
-            <img src='../src/Image/slider1-banner10.png' width='100%'/>
+            <img src='./src/Image/slider1-banner10.png' width='100%'/>
         </Box>
         </Container>
   )

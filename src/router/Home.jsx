@@ -11,7 +11,7 @@ export default function Home() {
            <Button variant='contained'>Contact Us </Button>
         </Box>
         <Box flex={1}>
-            <img src='../src/Image/World-Environment-Day-PNG-Free-Download.png' width='100%'/>
+            <img src='./src/Image/World-Environment-Day-PNG-Free-Download.png' width='100%'/>
         </Box>
     </Container>
   )
